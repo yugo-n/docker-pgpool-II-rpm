@@ -17,4 +17,4 @@ cp src/redhat/pgpool.conf.sample.patch /var/lib/pgsql/rpmbuild/SOURCES
 cp src/redhat/pgpool.init /var/lib/pgsql/rpmbuild/SOURCES
 cp src/redhat/pgpool.sysconfig /var/lib/pgsql/rpmbuild/SOURCES
 cd /var/lib/pgsql/rpmbuild/SPECS
-rpmbuild -ba pgpool.spec --define="pgpool_version $PGPOOL_VERSION" --define="pg_version $POSTGRESQL_VERSION2" --define="pghome /usr/pgsql-$POSTGRESQL_VERSION" --define="dist .pgdg"
+rpmbuild -ba pgpool.spec --define="pgpool_version $PGPOOL_VERSION" --define="pg_version $POSTGRESQL_VERSION2" --define="pghome /usr/pgsql-$POSTGRESQL_VERSION" --define="dist .rhel$RHEL_VERSION"

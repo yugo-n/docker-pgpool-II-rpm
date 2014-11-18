@@ -32,4 +32,4 @@ cd /var/lib/pgsql
 #cp /tmp/pgpool-II-head.patch rpmbuild/SOURCES
 cp /dev/null rpmbuild/SOURCES/pgpool-II-head.patch
 cd rpmbuild/SPECS
-rpmbuild -ba pgpool.spec --define="pgpool_version $PGPOOL_VERSION" --define="pg_version $POSTGRESQL_VERSION2" --define="pghome /usr/pgsql-$POSTGRESQL_VERSION" --define="dist .pgdg"
+rpmbuild -ba pgpool.spec --define="pgpool_version $PGPOOL_VERSION" --define="pg_version $POSTGRESQL_VERSION2" --define="pghome /usr/pgsql-$POSTGRESQL_VERSION" --define="dist .rhel$RHEL_VERSION"

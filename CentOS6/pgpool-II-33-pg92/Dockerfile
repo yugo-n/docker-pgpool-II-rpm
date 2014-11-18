@@ -5,6 +5,7 @@ FROM centos:centos6
 MAINTAINER Tatsuo Ishii <ishii@sraoss.co.jp>
 
 ENV PGPOOL_VERSION 3.3.4
+ENV RHEL_VERSION 6 
 
 RUN yum update -y
 RUN yum install -y wget
