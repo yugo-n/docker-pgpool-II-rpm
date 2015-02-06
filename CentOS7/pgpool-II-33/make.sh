@@ -10,7 +10,7 @@
 myvol=$HOME/volum
 
 # Docker image file name.
-image=pgpool2_33_centos7_rpm
+image=pgpool2_33_rpm
 
 if [ $# -gt 1 ];then
     if [ $1 = "-p" ];then
@@ -19,7 +19,6 @@ if [ $# -gt 1 ];then
 	echo "inserting proxy address $2."
     else
 	echo "wrong parameter $1".
-	exit 1
     fi
 else
     proxy_set=n
@@ -43,8 +42,7 @@ if [ $proxy_set = "y" ];then
     cp Dockerfile.orig Dockerfile
 fi
 
-# There's no PostgreSQL 9.2 community RPMs for CentOS7/RHEL7
-for i in 9.4 9.3
+for i in 9.4 9.3 9.2
 do
     echo "======= Start rpm build for PostgreSQL $i ======="
     sudo docker run --rm -e POSTGRESQL_VERSION=$i -v $myvol:/var/volum -t $image

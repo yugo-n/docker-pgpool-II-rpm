@@ -20,9 +20,6 @@ RUN su -c 'cd /var/lib/pgsql && git clone http://git.postgresql.org/git/pgpool2.
 # download pgpool-II tar ball
 RUN wget http://www.pgpool.net/download.php?f=pgpool-II-$PGPOOL_VERSION.tar.gz -O /tmp/pgpool-II-$PGPOOL_VERSION.tar.gz
 
-# centos7 base image does not include make.
-RUN yum install -y make
-
 ADD rpmbuild.sh /tmp/
 ADD build.sh /tmp/
 ADD pgpool.conf.sample.patch2 /tmp/
