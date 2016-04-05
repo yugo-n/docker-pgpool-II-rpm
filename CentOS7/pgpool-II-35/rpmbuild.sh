@@ -12,11 +12,11 @@ cp /tmp/pgpool-II-$PGPOOL_VERSION.tar.gz rpmbuild/SOURCES
 # checkout branch
 case $PGPOOL_VERSION in
     3.5*) PGPOOL_BRANCH="V3_5_STABLE"
-          dir="src/";;
+    use_src=true;;
     3.4.*) PGPOOL_BRANCH="V3_4_STABLE"
-           dir="src/";;
+	use_src=true;;
     3.3.*) PGPOOL_BRANCH="V3_3_STABLE"
-           dir="";;
+	use_src=false;;
     *) echo "wrong pgpool-II version $PGPOOL_VERSION";exit 1;;
 esac
 
@@ -25,10 +25,21 @@ git pull
 git checkout $PGPOOL_BRANCH
 git pull
 
-cp ${dir}pgpool.spec ../rpmbuild/SPECS
-cp ${dir}redhat/pgpool.conf.sample.patch ../rpmbuild/SOURCES
-cp ${dir}redhat/pgpool.init ../rpmbuild/SOURCES
-cp ${dir}redhat/pgpool.sysconfig ../rpmbuild/SOURCES
+if [ $use_src = "true" ];then
+    cp src/pgpool.spec ../rpmbuild/SPECS
+    cp src/redhat/pgpool.conf.sample.patch ../rpmbuild/SOURCES
+    cp src/redhat/pgpool.init ../rpmbuild/SOURCES
+    cp src/redhat/pgpool.sysconfig ../rpmbuild/SOURCES
+    cp src/redhat/pgpool.service ../rpmbuild/SOURCES
+    cp src/redhat/pgpool_socket_dir.patch ../rpmbuild/SOURCES
+else
+    cp pgpool.spec ../rpmbuild/SPECS
+    cp redhat/pgpool.conf.sample.patch ../rpmbuild/SOURCES
+    cp redhat/pgpool.init ../rpmbuild/SOURCES
+    cp redhat/pgpool.sysconfig ../rpmbuild/SOURCES
+    cp redhat/pgpool.service ../rpmbuild/SOURCES
+    cp redhat/pgpool_socket_dir.patch ../rpmbuild/SOURCES
+fi
 
 ./configure --with-pgsql=/usr/pgsql-$POSTGRESQL_VERSION
 make
@@ -43,4 +54,4 @@ diff -crN pgpool-II-$PGPOOL_VERSION head/pgpool-II-$PGPOOL_VERSION > pgpool-II-h
 cd /var/lib/pgsql
 cp /tmp/pgpool-II-head.patch rpmbuild/SOURCES
 cd rpmbuild/SPECS
-rpmbuild -ba pgpool.spec --define="pgpool_version $PGPOOL_VERSION" --define="pg_version $POSTGRESQL_VERSION2" --define="pghome /usr/pgsql-$POSTGRESQL_VERSION" --define="dist .rhel6"
+rpmbuild -ba pgpool.spec --define="pgpool_version $PGPOOL_VERSION" --define="pg_version $POSTGRESQL_VERSION2" --define="pghome /usr/pgsql-$POSTGRESQL_VERSION" --define="dist .rhel7"

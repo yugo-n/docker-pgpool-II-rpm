@@ -4,7 +4,7 @@ FROM centos:centos6
 
 MAINTAINER Yugo Nagata <nagata@sraoss.co.jp>
 
-ENV http_proxy http://www-proxy.sra.co.jp:80/
+ENV http_proxy http://www-proxy:80/
 
 ENV RPM_USER rpmuser
 

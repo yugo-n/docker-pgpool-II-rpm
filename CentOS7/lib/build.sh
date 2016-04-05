@@ -9,7 +9,7 @@ export POSTGRESQL_VERSION2=`echo $POSTGRESQL_VERSION|sed s/\\\\.//`
 case $POSTGRESQL_VERSION in
     "9.4") YUMPG=pgdg-centos94-9.4-1.noarch.rpm;;
     "9.3") YUMPG=pgdg-centos93-9.3-1.noarch.rpm;;
-    "9.2") YUMPG=pgdg-centos92-9.2-6.noarch.rpm;;
+    "9.2") YUMPG=pgdg-centos92-9.2-1.noarch.rpm;;
     "*") echo wrong postgresql version \"$POSTGRESQL_VERSION\";exit 1;;
 esac
 

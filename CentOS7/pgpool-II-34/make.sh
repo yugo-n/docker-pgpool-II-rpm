@@ -10,7 +10,7 @@
 myvol=$HOME/volum
 
 # Docker image file name.
-image=pgpool2_33_rpm
+image=pgpool2_34_rpm
 
 if [ $# -gt 1 ];then
     if [ $1 = "-p" ];then
@@ -32,9 +32,9 @@ if [ $proxy_set = "y" ];then
     cp Dockerfile Dockerfile.orig
     cat Dockerfile|sed "/ENV/ aENV http_proxy $proxy" > Dockerfile.proxy
     cp Dockerfile.proxy Dockerfile
-else
-    sudo docker build -t $image .
 fi
+
+sudo docker build -t $image .
 
 echo "======= End docker build ======="
 
